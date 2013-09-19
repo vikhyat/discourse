@@ -98,11 +98,6 @@ GIT
       activesupport (>= 3.0.0)
 
 PATH
-  remote: vendor/gems/discourse_emoji
-  specs:
-    discourse_emoji (0.0.1)
-
-PATH
   remote: vendor/gems/discourse_plugin
   specs:
     discourse_plugin (0.0.1)
@@ -482,7 +477,6 @@ DEPENDENCIES
   binding_of_caller
   certified
   diffy (>= 3.0)
-  discourse_emoji!
   discourse_plugin!
   email_reply_parser!
   ember-rails
