@@ -124,7 +124,7 @@ gem 'discourse_plugin', path: 'vendor/gems/discourse_plugin'
 # Polls and Tasks have been disabled for launch, we need think all sorts of stuff through before adding them back in
 #   biggest concern is core support for custom sort orders, but there is also styling that just gets mishmashed into our core theme.
 # gem 'discourse_poll', path: 'vendor/gems/discourse_poll'
-gem 'discourse_emoji', path: 'vendor/gems/discourse_emoji'
+# gem 'discourse_emoji', path: 'vendor/gems/discourse_emoji'
 # gem 'discourse_task', path: 'vendor/gems/discourse_task'
 
 # Gems used only for assets and not required
