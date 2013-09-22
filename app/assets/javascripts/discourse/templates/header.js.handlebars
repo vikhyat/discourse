@@ -1,3 +1,4 @@
+<!-- Hummingbird Header -->
 <nav class="navbar navbar-inverse hb-nav navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -18,12 +19,13 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             Dashboard <b class="caret"></b>
           </a>
-          <!-- <i class='dropdown-arrow dropdown-arrow-inverse'></i> -->
-          <ul class="dropdown-menu left-nav-section">
-            <li><a href="http://www.hummingbird.me/dashboard">Profile</a></li>
-            <li><a href="http://www.hummingbird.me/dashboard">Library</a></li>
-            <li><a href="http://www.hummingbird.me/recommendations">Recommendations</a></li>
-          </ul>
+          {{#if currentUser}}
+            <ul class="dropdown-menu left-nav-section">
+              <li><a href="http://hummingbird.me/users/{{currentUser.username}}">Profile</a></li>
+              <li><a href="http://hummingbird.me/users/{{currentUser.username}}/watchlist">Library</a></li>
+              <li><a href="http://hummingbird.me/recommendations">Recommendations</a></li>
+            </ul>
+          {{/if}}
         </li>
 
         <li class="dropdown">
@@ -31,20 +33,20 @@
             Explore <b class="caret"></b>
           </a>
           <ul class="dropdown-menu left-nav-section">
-            <li><a href="http://www.hummingbird.me/anime">What's Trending</a></li>
-            <li><a href="http://www.hummingbird.me/anime/filter/all">Explore Anime</a></li>
-            <li><a href="http://www.hummingbird.me/anime/upcoming">Upcoming</a></li>
+            <li><a href="http://hummingbird.me/anime">What's Trending</a></li>
+            <li><a href="http://hummingbird.me/anime/filter/all">Explore Anime</a></li>
+            <li><a href="http://hummingbird.me/anime/upcoming">Upcoming</a></li>
           </ul>
         </li>
 
-        <li class="dropdown  active">
+        <li class="dropdown active">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             Community
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu left-nav-section">
             <li><a href="http://forums.hummingbird.me">Forums</a></li>
-            <li><a href="http://www.hummingbird.me/chat">Chat</a></li>
+            <li><a href="http://hummingbird.me/chat">Chat</a></li>
           </ul>
         </li>
       </ul>
@@ -52,6 +54,8 @@
     </div>
   </div>
 </nav>
+
+<!-- Main Discourse Header -->
 
 <div class='container'>
   <div class='contents clearfix'>
