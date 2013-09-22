@@ -53,8 +53,12 @@ Discourse.Utilities = {
 
   avatarUrl: function(template, size) {
     if (!template) { return ""; }
-    var rawSize = Discourse.Utilities.getRawSize(Discourse.Utilities.translateSize(size));
-    return template.replace(/\{size\}/g, rawSize);
+    if (size == 25) {
+      return template.replace(/\{size\}/g, 'small');
+    }
+    else {
+      return template.replace(/\{size\}/g, 'thumb');
+    }
   },
 
   getRawSize: function(size) {
