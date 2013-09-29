@@ -1,8 +1,87 @@
 {{#unless loading}}
+  {{!-- Hummingbird Profile Stuff --}}
+  <div class="user-cover">
+    <img src="http://hummingbird.me/users/{{unbound username}}/cover_image" class="cover-photo">
+    <div class="cover-overlay"></div>
+  </div>
+  <div class="container relative">
+    <div class="row">
+      <div class="user-cover-options">
+        <div class="col-md-10 user-wrapper">
+          <div class="col-sm-2 col-md-2 user-avatar clearfix">
+            <div class="large-avatar">
+              {{boundAvatar model imageSize="huge"}}
+              <!--
+              <div class="online-box">
+                <div class="online-indicator online"></div>
+              </div>
+              -->
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-10 account-info">
+            <h1 class="username">{{username}}</h1>
+            <ul class="inline-list clearfix">
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="icon-exchange">&nbsp;</i>
+                  Compare
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="icon-heart-empty">&nbsp;</i>
+                  Suggest
+                </a>
+              </li>
+              <li>
+                <a href="javascript:void(0)">
+                  <i class="icon-envelope-alt">&nbsp;</i>
+                  Message
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <button class="btn btn-default btn-lg follow-button" type="button">
+          Follow
+        </button>
+      </div> <!-- .user-cover-options -->
+    </div>
+  </div>
+  <div class="profile-navigation">
+    <div class="container">
+      <div class="row"
+        <ul class="inline-list clearfix">
+          <li class="nav-link">
+            <a href="http://hummingbird.me/users/{{unbound username}}/feed">Activity Feed</a>
+          </li>
+          <li class="nav-link">
+            <a href="http://hummingbird.me/users/{{unbound username}}/watchlist">Library</a>
+          </li>
+          <li class="nav-link active">
+            {{#linkTo 'userActivity'}}Forums{{/linkTo}}
+          </li>
+          <li class="nav-link dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">More</a>
+            <ul class="dropdown-menu profile-nav-drop">
+              <li><a href="http://hummingbird.me/users/{{unbound username}}/favorite_anime">Favorite Anime</a></li>
+              <li><a href="http://hummingbird.me/users/{{unbound username}}/followers">Followers</a></li>
+              <li><a href="http://hummingbird.me/users/{{unbound username}}/following">Following</a></li>
+              {{#if viewingSelf}}
+                <li><a href="http://hummingbird.me/users/edit">Preferences</a></li>
+              {{/if}}
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {{!-- End Hummingbird Profile Stuff --}}
+
   <div class="user-heading">
     <div class="container">
       <div class="full-width" id='user-menu'>
-        <h1>{{name}}<span>{{username}}{{{statusIcon}}}</span></h1>
+        {{!-- <h1>{{name}}<span>{{username}}{{{statusIcon}}}</span></h1> --}}
 
         {{#if viewingSelf}}
           <button {{action "logout" target="Discourse"}} class='btn'>{{i18n user.log_out}}</button>
@@ -29,11 +108,12 @@
           {{/if}}
         </ul>
         <div class='avatar-wrapper'>
-          {{boundAvatar model imageSize="huge"}}
+          {{!--boundAvatar model imageSize="huge"--}}
         </div>
       </div>
     </div>
   </div>
+  {{!--
   <div class="container">
     <div class='user-info clearfix'>
       <div class='about-me'>
@@ -41,6 +121,7 @@
       </div>
     </div>
   </div>
+  --}}
   <div class="container">
     {{outlet userOutlet}}
   </div>
