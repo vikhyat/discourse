@@ -11,4 +11,3 @@ Discourse.ApplicationView = Discourse.View.extend({
 });
 
 
-
