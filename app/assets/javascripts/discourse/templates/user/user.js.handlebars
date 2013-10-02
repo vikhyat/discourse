@@ -1,7 +1,7 @@
 {{#unless loading}}
   {{!-- Hummingbird Profile Stuff --}}
   <div class="user-cover">
-    <img src="http://hummingbird.me/users/{{unbound username}}/cover_image" class="cover-photo">
+    <img {{bindAttr src="hummingbird.coverImage"}} {{bindAttr class=":cover-photo hummingbird.loaded::cover-photo-loading"}}>
     <div class="cover-overlay"></div>
   </div>
   <div class="container relative">
@@ -11,11 +11,11 @@
           <div class="col-sm-2 col-md-2 user-avatar clearfix">
             <div class="large-avatar">
               {{boundAvatar model imageSize="huge"}}
-              <!--
-              <div class="online-box">
-                <div class="online-indicator online"></div>
-              </div>
-              -->
+              {{#if hummingbird.loaded}}
+                <div class="online-box">
+                  <div {{bindAttr class=":online-indicator hummingbird.online:online:offline"}}></div>
+                </div>
+              {{/if}}
             </div>
           </div>
           <div class="col-sm-12 col-md-10 account-info">
