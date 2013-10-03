@@ -49,7 +49,7 @@
           <div class='topic-meta-data span2'>
             {{#unless userDeleted}}
               <div {{bindAttr class=":contents byTopicCreator:topic-creator"}}>
-                <a href='{{unbound usernameUrl}}'>{{avatar this imageSize="large"}}</a>
+                <a href='{{unbound usernameUrl}}' {{action showPosterExpansion this}}>{{avatar this imageSize="large"}}</a>
               </div>
             {{else}}
               <div class="contents">
@@ -59,9 +59,9 @@
             {{/unless}}
           </div>
           <span class="username">
-            <h3 {{bindAttr class="staff new_user"}}><a class="username-link" href='{{unbound usernameUrl}}'>{{username}}</a>
+            <h3 {{bindAttr class="staff new_user"}}><a class="username-link" href='{{unbound usernameUrl}}' {{action showPosterExpansion this}}>{{username}}</a></h3>
             </h3>
-            {{#if user_title}}<span class="user-title">{{user_title}}</span>{{/if}}
+            {{#if user_title}}<span class="user-title" {{action showPosterExpansion this}}>{{user_title}}</span>{{/if}}
           </span>
           {{{cooked}}}
         </div>
