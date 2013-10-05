@@ -11,12 +11,14 @@
       <div class='post-info post-date'>{{unboundAgeWithTooltip created_at}}</div>
       {{#if view.parentView.previousPost}}<a href='{{unbound url}}' class="post-info arrow" title="{{i18n topic.jump_reply_up}}"><i class='icon icon-arrow-up'></i></a>{{/if}}
     </div>
-    <span class="username">
-      <h3 {{bindAttr class="staff new_user"}}><a class="username-link" href='{{unbound usernameUrl}}'>{{username}}</a>
-      </h3>
-      {{#if user_title}}<span class="user-title">{{user_title}}</span>{{/if}}
-    </span>
-    {{{unbound cooked}}}
+    <div class="right-side-block">
+      <span class="username">
+        <h3 {{bindAttr class="staff new_user"}}><a class="username-link" href='{{unbound usernameUrl}}'>{{breakUp username}}</a>
+        </h3>
+        {{#if user_title}}<span class="user-title">{{user_title}}</span>{{/if}}
+      </span>
+      {{{unbound cooked}}}
+    </div>
     {{#unless view.parentView.previousPost}}<a href='{{unbound url}}' class="arrow" title="{{i18n topic.jump_reply_down}}"><i class='icon icon-arrow-down'></i></a>{{/unless}}
   </div>
 </div>
