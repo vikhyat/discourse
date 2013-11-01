@@ -64,7 +64,7 @@ gem 'ember-source', '1.0.0.rc6.2'
 gem 'handlebars-source', '1.0.12'
 gem 'barber'
 
-gem 'vestal_versions', git: 'https://github.com/zhangyuan/vestal_versions'
+gem 'vestal_versions', git: 'https://github.com/SamSaffron/vestal_versions'
 
 gem 'message_bus', git: 'https://github.com/SamSaffron/message_bus'
 gem 'rails_multisite', path: 'vendor/gems/rails_multisite'
@@ -116,6 +116,7 @@ gem 'therubyracer', require: 'v8'
 gem 'thin', require: false
 gem 'diffy', '>= 3.0', require: false
 gem 'highline', require: false
+gem 'rack-protection' # security
 
 # Gem that enables support for plugins. It is required.
 gem 'discourse_plugin', path: 'vendor/gems/discourse_plugin'
@@ -145,13 +146,9 @@ end
 
 group :test, :development do
   gem 'mock_redis'
-  gem 'listen', require: false
+  gem 'listen', '0.7.3', require: false
   gem 'certified', require: false
-  if rails4?
-    gem 'fabrication', github: 'paulelliott/fabrication', require: false
-  else
-    gem 'fabrication', require: false
-  end
+  gem 'fabrication', require: false
   gem 'qunit-rails'
   gem 'mocha', require: false
   gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false

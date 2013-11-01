@@ -59,7 +59,7 @@
 <div class='container'>
   <div class='contents clearfix'>
 
-    {{view.logoHTML}}
+    {{discourse-logo minimized=showExtraInfo}}
 
     {{#if showExtraInfo}}
       <div class="extra-info-wrapper">
@@ -68,6 +68,7 @@
             <a {{bindAttr class=":star topic.starred:starred"}} {{action toggleStar}} href='#' {{bindAttr title="topic.favoriteTooltip"}}></a>
           {{/if}}
           <h1>
+          {{boundCategoryLink topic.category}}
           {{#if topic.details.loaded}}
             {{topicStatus topic=topic}}
             <a class='topic-link' href='{{unbound topic.url}}'>{{{topic.fancy_title}}}</a>
@@ -78,7 +79,6 @@
               {{i18n topic.loading}}
             {{/if}}
           {{/if}}
-          {{boundCategoryLink topic.category}}
           </h1>
         </div>
       </div>
@@ -202,7 +202,7 @@
 
           {{#each categories}}
             <li class='category'>
-              {{categoryLink this}}
+              {{categoryLink this allowUncategorized=true}}
               <b>{{unbound topic_count}}</b></a>
             </li>
           {{/each}}
