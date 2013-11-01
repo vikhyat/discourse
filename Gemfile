@@ -1,202 +1,552 @@
-source 'http://rubygems.org'
+GIT
+  remote: git://github.com/SamSaffron/redis-store.git
+  revision: 1eafaa3d8bfbcb61ad89d1a2831adbba4ea8e1e1
+  specs:
+    redis-rails (3.2.3)
+      redis-actionpack (>= 3.2.3)
+      redis-activesupport (>= 3.2.3)
+      redis-store (~> 1.1.0)
 
-# monkey patching to support dual booting
-module Bundler::SharedHelpers
-  def default_lockfile=(path)
-    @default_lockfile = path
-  end
-  def default_lockfile
-    @default_lockfile ||= Pathname.new("#{default_gemfile}.lock")
-  end
-end
+GIT
+  remote: git://github.com/SamSaffron/seed-fu.git
+  revision: 502c8b8514df3bf028c9231cc3a6ea3cff4f37f0
+  specs:
+    seed-fu (2.2.0)
+      activerecord (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
 
-module ::Kernel
-  def rails4?
-    !!ENV["RAILS4"]
-  end
-end
+GIT
+  remote: git://github.com/rails/rails.git
+  revision: 7b2f64fca71c8d13428eb48b65399736a8327554
+  branch: 4-0-stable
+  specs:
+    actionmailer (4.0.0)
+      actionpack (= 4.0.0)
+      mail (~> 2.5.4)
+    actionpack (4.0.0)
+      activesupport (= 4.0.0)
+      builder (~> 3.1.0)
+      erubis (~> 2.7.0)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    activemodel (4.0.0)
+      activesupport (= 4.0.0)
+      builder (~> 3.1.0)
+    activerecord (4.0.0)
+      activemodel (= 4.0.0)
+      activerecord-deprecated_finders (~> 1.0.2)
+      activesupport (= 4.0.0)
+      arel (~> 4.0.0)
+    activesupport (4.0.0)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
+    rails (4.0.0)
+      actionmailer (= 4.0.0)
+      actionpack (= 4.0.0)
+      activerecord (= 4.0.0)
+      activesupport (= 4.0.0)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.0.0)
+      sprockets-rails (~> 2.0.0)
+    railties (4.0.0)
+      actionpack (= 4.0.0)
+      activesupport (= 4.0.0)
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
 
-if rails4?
-  Bundler::SharedHelpers.default_lockfile = Pathname.new("#{Bundler::SharedHelpers.default_gemfile}_rails4.lock")
+GIT
+  remote: git://github.com/sporkrb/spork-rails.git
+  revision: 0dd45e59d3237b4c8f9efc215b46d9c07072a95e
+  specs:
+    spork-rails (4.0.0)
+      rails (>= 3.0.0, < 5)
+      spork (>= 1.0rc0)
 
-  # Bundler::Dsl.evaluate already called with an incorrect lockfile ... fix it
-  class Bundler::Dsl
-    # A bit messy, this can be called multiple times by bundler, avoid blowing the stack
-    unless self.method_defined? :to_definition_unpatched
-      alias_method :to_definition_unpatched, :to_definition
-      puts "Booting in Rails 4 mode"
-    end
-    def to_definition(bad_lockfile, unlock)
-      to_definition_unpatched(Bundler::SharedHelpers.default_lockfile, unlock)
-    end
-  end
-end
+GIT
+  remote: https://github.com/CodeMonkeySteve/fast_xor.git
+  revision: 85b79ec6d116f9680f23bd2c5c8c2c2039d477d8
+  specs:
+    fast_xor (1.1.2)
+      rake
+      rake-compiler
 
-gem 'seed-fu' , github: 'SamSaffron/seed-fu'
+GIT
+  remote: https://github.com/MiniProfiler/rack-mini-profiler.git
+  revision: 5f2048351f5f8ed7cffa2943539a7cc97f0a9764
+  specs:
+    rack-mini-profiler (0.1.31)
+      rack (>= 1.1.3)
 
-if rails4?
-  gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '4-0-stable'
-  gem 'redis-rails', :git => 'git://github.com/SamSaffron/redis-store.git'
-  gem 'rails-observers'
-  gem 'actionpack-action_caching'
-else
-  # we had pain with the 3.2.13 upgrade so monkey patch the security fix
-  # next time around we hope to upgrade
-  gem 'rails', '3.2.12'
-  gem 'strong_parameters' # remove when we upgrade to Rails 4
-  # we are using a custom sprockets repo to work around: https://github.com/rails/rails/issues/8099#issuecomment-16137638
-  # REVIEW EVERY RELEASE
-  gem 'sprockets', git: 'https://github.com/SamSaffron/sprockets.git', branch: 'rails-compat'
-  gem 'redis-rails'
-  gem 'activerecord-postgres-hstore'
-  gem 'active_attr'
-end
+GIT
+  remote: https://github.com/SamSaffron/annotate_models.git
+  revision: ebe4ba7e3f6ceeb43e4e40078da2b261a1bb71b2
+  specs:
+    annotate (2.6.0.beta1)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
 
-gem 'hiredis'
-gem 'redis', :require => ["redis", "redis/connection/hiredis"]
+GIT
+  remote: https://github.com/SamSaffron/flamegraph.git
+  revision: 07bd0ffdfd352e2fceb4edaf281990ba99156355
+  specs:
+    flamegraph (0.0.5)
+      fast_stack
 
-gem 'active_model_serializers'
+GIT
+  remote: https://github.com/SamSaffron/message_bus
+  revision: 00f12ec544d7d72965f58d6af167cafa46aac582
+  specs:
+    message_bus (0.0.2)
+      eventmachine
+      rack (>= 1.1.3)
+      redis
+      thin
 
-# we had issues with latest, stick to the rev till we figure this out
-# PR that makes it all hang together welcome
-gem 'ember-rails'
-gem 'ember-source', '1.0.0.rc6.2'
-gem 'handlebars-source', '1.0.12'
-gem 'barber'
+GIT
+  remote: https://github.com/SamSaffron/vestal_versions
+  revision: 671833227aa47f16e9c907fe7b2870be3743ac00
+  specs:
+    vestal_versions (1.2.3)
+      activerecord (> 3.0)
+      activesupport (> 3.0)
 
-gem 'vestal_versions', git: 'https://github.com/SamSaffron/vestal_versions'
+GIT
+  remote: https://github.com/callahad/omniauth-browserid.git
+  revision: af62d667626c1622de6fe13b60849c3640765ab1
+  branch: observer_api
+  specs:
+    omniauth-browserid (0.0.2)
+      faraday
+      multi_json
+      omniauth (~> 1.0)
 
-gem 'message_bus', git: 'https://github.com/SamSaffron/message_bus'
-gem 'rails_multisite', path: 'vendor/gems/rails_multisite'
-gem 'simple_handlebars_rails', path: 'vendor/gems/simple_handlebars_rails'
+GIT
+  remote: https://github.com/lawrencepit/email_reply_parser.git
+  revision: 67408dfb1b99fb8d5f145f782b9e22d1851a8e5a
+  specs:
+    email_reply_parser (0.6)
 
-gem 'redcarpet', require: false
-gem 'airbrake', '3.1.2', require: false # errbit is broken with 3.1.3 for now
-gem 'sidetiq', '>= 0.3.6'
-gem 'eventmachine'
-gem 'fast_xs'
-gem 'fast_xor', git: 'https://github.com/CodeMonkeySteve/fast_xor.git'
-gem 'fastimage'
-gem 'fog', require: false
+PATH
+  remote: vendor/gems/discourse_emoji
+  specs:
+    discourse_emoji (0.0.1)
 
-gem 'email_reply_parser', git: 'https://github.com/lawrencepit/email_reply_parser.git'
+PATH
+  remote: vendor/gems/discourse_plugin
+  specs:
+    discourse_plugin (0.0.1)
 
-# note: for image_optim to correctly work you need
-# sudo apt-get install -y advancecomp gifsicle jpegoptim libjpeg-progs optipng pngcrush
-gem 'image_optim'
-# note: for image_sorcery to correctly work you need
-# sudo apt-get install -y imagemagick
-gem 'image_sorcery'
-gem 'multi_json'
-gem 'mustache'
-gem 'nokogiri'
-gem 'omniauth'
-gem 'omniauth-openid'
-gem 'openid-redis-store'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
-gem 'omniauth-github'
-gem 'omniauth-oauth2', require: false
-gem 'omniauth-browserid', git: 'https://github.com/callahad/omniauth-browserid.git', branch: 'observer_api'
-gem 'omniauth-cas'
-gem 'oj'
-gem 'pg'
-gem 'rake'
+PATH
+  remote: vendor/gems/rails_multisite
+  specs:
+    rails_multisite (0.0.1)
 
+PATH
+  remote: vendor/gems/simple_handlebars_rails
+  specs:
+    simple_handlebars_rails (0.0.1)
+      rails (> 3.1)
 
-gem 'rest-client'
-gem 'rinku'
-gem 'sanitize'
-gem 'sass'
-gem 'sidekiq'
-gem 'sidekiq-failures'
-gem 'sinatra', require: nil
-gem 'slim'  # required for sidekiq-web
-gem 'therubyracer', require: 'v8'
-gem 'thin', require: false
-gem 'diffy', '>= 3.0', require: false
-gem 'highline', require: false
-gem 'rack-protection' # security
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actionpack-action_caching (1.0.0)
+      actionpack (>= 4.0.0.beta, < 5.0)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
+    activerecord-deprecated_finders (1.0.3)
+    addressable (2.3.5)
+    airbrake (3.1.2)
+      activesupport
+      builder
+    arel (4.0.1)
+    atomic (1.1.14)
+    barber (0.4.2)
+      ember-source
+      execjs
+      handlebars-source
+    better_errors (1.0.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
+    builder (3.1.4)
+    celluloid (0.15.2)
+      timers (~> 1.1.0)
+    certified (0.1.1)
+    coderay (1.0.9)
+    connection_pool (1.1.0)
+    daemons (1.1.9)
+    debug_inspector (0.0.2)
+    diff-lcs (1.2.4)
+    diffy (3.0.1)
+    ember-data-source (0.14)
+      ember-source
+    ember-rails (0.13.0)
+      active_model_serializers
+      barber (>= 0.4.1)
+      ember-data-source
+      ember-source
+      execjs (>= 1.2)
+      handlebars-source
+      railties (>= 3.1)
+    ember-source (1.0.0.rc6.2)
+      handlebars-source (= 1.0.12)
+    erubis (2.7.0)
+    eventmachine (1.0.3)
+    excon (0.27.6)
+    execjs (2.0.2)
+    exifr (1.1.3)
+    fabrication (2.8.1)
+    fakeweb (1.3.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    fast_blank (0.0.1)
+      rake
+      rake-compiler
+    fast_stack (0.1.0)
+      rake
+      rake-compiler
+    fast_xs (0.8.0)
+    fastimage (1.5.2)
+    ffi (1.9.0)
+    fog (1.16.0)
+      builder
+      excon (~> 0.27.0)
+      formatador (~> 0.2.0)
+      mime-types
+      multi_json (~> 1.0)
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+      nokogiri (~> 1.5)
+      ruby-hmac
+      unicode (~> 0.4.4)
+    formatador (0.2.4)
+    fspath (2.0.5)
+    given_core (3.1.1)
+      sorcerer (>= 0.3.7)
+    handlebars-source (1.0.12)
+    hashie (2.0.5)
+    highline (1.6.20)
+    hike (1.2.3)
+    hiredis (0.4.5)
+    httpauth (0.2.0)
+    i18n (0.6.5)
+    ice_cube (0.11.0)
+    image_optim (0.9.1)
+      exifr (~> 1.1.3)
+      fspath (~> 2.0.5)
+      image_size (~> 1.1.2)
+      in_threads (~> 1.2.0)
+      progress (~> 3.0.0)
+    image_size (1.1.3)
+    image_sorcery (1.1.0)
+    in_threads (1.2.0)
+    json (1.8.1)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
+    kgio (2.8.1)
+    librarian (0.1.1)
+      highline
+      thor (~> 0.15)
+    libv8 (3.16.14.3)
+    listen (0.7.3)
+    lru_redux (0.8.1)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    metaclass (0.0.1)
+    method_source (0.8.2)
+    mime-types (1.25)
+    mini_portile (0.5.1)
+    minitest (4.7.5)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
+    mock_redis (0.9.0)
+    multi_json (1.8.2)
+    multipart-post (1.2.0)
+    mustache (0.99.4)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
+    nokogiri (1.6.0)
+      mini_portile (~> 0.5.0)
+    oauth (0.4.7)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    oj (2.1.7)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-cas (1.0.4)
+      addressable (~> 2.3)
+      nokogiri (~> 1.6)
+      omniauth (~> 1.1.0)
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-github (1.1.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
+    omniauth-openid (1.0.1)
+      omniauth (~> 1.0)
+      rack-openid (~> 1.3.1)
+    omniauth-twitter (1.0.1)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
+    openid-redis-store (0.0.2)
+      redis
+      ruby-openid
+    pg (0.17.0)
+    polyglot (0.3.3)
+    progress (3.0.0)
+    pry (0.9.12.2)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-nav (0.2.3)
+      pry (~> 0.9.10)
+    pry-rails (0.3.2)
+      pry (>= 0.9.10)
+    puma (2.6.0)
+      rack (>= 1.1, < 2.0)
+    qunit-rails (0.0.4)
+      railties (>= 3.2.3)
+    rack (1.5.2)
+    rack-cors (0.2.8)
+      rack
+    rack-openid (1.3.1)
+      rack (>= 1.1.0)
+      ruby-openid (>= 2.1.8)
+    rack-protection (1.5.1)
+      rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
+    raindrops (0.12.0)
+    rake (10.1.0)
+    rake-compiler (0.9.1)
+      rake
+    rb-fsevent (0.9.3)
+    rb-inotify (0.9.2)
+      ffi (>= 0.5.0)
+    redcarpet (3.0.0)
+    redis (3.0.5)
+    redis-actionpack (4.0.0)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.0.0)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-namespace (1.3.1)
+      redis (~> 3.0.0)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.4)
+      redis (>= 2.2)
+    ref (1.0.5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    rinku (1.7.3)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.6)
+    rspec-expectations (2.14.3)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-given (3.1.1)
+      given_core (= 3.1.1)
+      rspec (>= 2.12)
+    rspec-mocks (2.14.4)
+    rspec-rails (2.14.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    ruby-hmac (0.4.0)
+    ruby-openid (2.3.0)
+    sanitize (2.0.6)
+      nokogiri (>= 1.4.4)
+    sass (3.2.12)
+    sass-rails (4.0.1)
+      railties (>= 4.0.0, < 5.0)
+      sass (>= 3.1.10)
+      sprockets-rails (~> 2.0.0)
+    shoulda (3.5.0)
+      shoulda-context (~> 1.0, >= 1.0.1)
+      shoulda-matchers (>= 1.4.1, < 3.0)
+    shoulda-context (1.1.5)
+    shoulda-matchers (2.4.0)
+      activesupport (>= 3.0.0)
+    sidekiq (2.15.2)
+      celluloid (>= 0.15.2)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0.4)
+      redis-namespace (>= 1.3.1)
+    sidekiq-failures (0.2.2)
+      sidekiq (>= 2.9.0)
+    sidetiq (0.4.3)
+      celluloid (>= 0.14.1)
+      ice_cube (~> 0.11.0)
+      sidekiq (~> 2.15.0)
+    simplecov (0.7.1)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.7.1)
+    simplecov-html (0.7.1)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    slim (2.0.1)
+      temple (~> 0.6.6)
+      tilt (>= 1.3.3, < 2.1)
+    slop (3.4.6)
+    sorcerer (1.0.2)
+    spork (1.0.0rc4)
+    sprockets (2.10.0)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
+    sprockets-rails (2.0.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (~> 2.8)
+    temple (0.6.7)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
+    thin (1.6.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.5.0)
+    thor (0.18.1)
+    thread_safe (0.1.3)
+      atomic
+    tilt (1.4.1)
+    timecop (0.6.3)
+    timers (1.1.0)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.38)
+    uglifier (2.2.1)
+      execjs (>= 0.3.0)
+      multi_json (~> 1.0, >= 1.0.2)
+    unicode (0.4.4)
+    unicorn (4.6.3)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
 
-# Gem that enables support for plugins. It is required.
-gem 'discourse_plugin', path: 'vendor/gems/discourse_plugin'
+PLATFORMS
+  ruby
 
-# Discourse Plugins (optional)
-# Polls and Tasks have been disabled for launch, we need think all sorts of stuff through before adding them back in
-#   biggest concern is core support for custom sort orders, but there is also styling that just gets mishmashed into our core theme.
-# gem 'discourse_poll', path: 'vendor/gems/discourse_poll'
-# gem 'discourse_emoji', path: 'vendor/gems/discourse_emoji'
-# gem 'discourse_task', path: 'vendor/gems/discourse_task'
-
-# Gems used only for assets and not required
-# in production environments by default.
-# allow everywhere for now cause we are allowing asset debugging in prd
-group :assets do
-  gem 'sass'
-  gem 'sass-rails'
-  # Sam: disabling for now, having issues with our jenkins build
-  # gem 'turbo-sprockets-rails3'
-  gem 'uglifier'
-end
-
-group :test do
-  gem 'fakeweb', '~> 1.3.0', require: false
-  gem 'minitest', require: false
-end
-
-group :test, :development do
-  gem 'mock_redis'
-  gem 'listen', '0.7.3', require: false
-  gem 'certified', require: false
-  gem 'fabrication', require: false
-  gem 'qunit-rails'
-  gem 'mocha', require: false
-  gem 'rb-fsevent', require: RUBY_PLATFORM =~ /darwin/i ? 'rb-fsevent' : false
-  gem 'rb-inotify', '~> 0.9', require: RUBY_PLATFORM =~ /linux/i ? 'rb-inotify' : false
-  gem 'rspec-rails', require: false
-  gem 'shoulda', require: false
-  gem 'simplecov', require: false
-  gem 'timecop'
-  gem 'rspec-given'
-  gem 'pry-rails'
-  gem 'pry-nav'
-  gem 'spork-rails', :github => 'sporkrb/spork-rails'
-end
-
-group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'librarian', '>= 0.0.25', require: false
-  # https://github.com/ctran/annotate_models/pull/106
-  gem 'annotate', :git => 'https://github.com/SamSaffron/annotate_models.git'
-end
-
-
-
-# this is an optional gem, it provides a high performance replacement
-# to String#blank? a method that is called quite frequently in current
-# ActiveRecord, this may change in the future
-gem 'fast_blank' #, github: "SamSaffron/fast_blank"
-
-# this provides a very efficient lru cache
-gem 'lru_redux'
-
-# IMPORTANT: mini profiler monkey patches, so it better be required last
-#  If you want to amend mini profiler to do the monkey patches in the railstie
-#  we are open to it. by deferring require to the initializer we can configure disourse installs without it
-
-gem 'flamegraph', git: 'https://github.com/SamSaffron/flamegraph.git', require: false
-gem 'rack-mini-profiler',  git: 'https://github.com/MiniProfiler/rack-mini-profiler.git', require: false
-
-# used for caching, optional
-gem 'rack-cors', require: false
-gem 'unicorn', require: false
-gem 'puma', require: false
-
-# perftools only works on 1.9 atm
-group :profile do
-  # travis refuses to install this, instead of fuffing, just avoid it for now
-  #
-  # if you need to profile, uncomment out this line
-  # gem 'rack-perftools_profiler', require: 'rack/perftools_profiler', platform: :mri_19
-end
+DEPENDENCIES
+  actionpack-action_caching
+  active_model_serializers
+  airbrake (= 3.1.2)
+  annotate!
+  barber
+  better_errors
+  binding_of_caller
+  certified
+  diffy (>= 3.0)
+  discourse_emoji!
+  discourse_plugin!
+  email_reply_parser!
+  ember-rails
+  ember-source (= 1.0.0.rc6.2)
+  eventmachine
+  fabrication
+  fakeweb (~> 1.3.0)
+  fast_blank
+  fast_xor!
+  fast_xs
+  fastimage
+  flamegraph!
+  fog
+  handlebars-source (= 1.0.12)
+  highline
+  hiredis
+  image_optim
+  image_sorcery
+  librarian (>= 0.0.25)
+  listen (= 0.7.3)
+  lru_redux
+  message_bus!
+  minitest
+  mocha
+  mock_redis
+  multi_json
+  mustache
+  nokogiri
+  oj
+  omniauth
+  omniauth-browserid!
+  omniauth-cas
+  omniauth-facebook
+  omniauth-github
+  omniauth-oauth2
+  omniauth-openid
+  omniauth-twitter
+  openid-redis-store
+  pg
+  pry-nav
+  pry-rails
+  puma
+  qunit-rails
+  rack-cors
+  rack-mini-profiler!
+  rack-protection
+  rails!
+  rails-observers
+  rails_multisite!
+  rake
+  rb-fsevent
+  rb-inotify (~> 0.9)
+  redcarpet
+  redis
+  redis-rails!
+  rest-client
+  rinku
+  rspec-given
+  rspec-rails
+  sanitize
+  sass
+  sass-rails
+  seed-fu!
+  shoulda
+  sidekiq
+  sidekiq-failures
+  sidetiq (>= 0.3.6)
+  simple_handlebars_rails!
+  simplecov
+  sinatra
+  slim
+  spork-rails!
+  therubyracer
+  thin
+  timecop
+  uglifier
+  unicorn
+  vestal_versions!
