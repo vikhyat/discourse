@@ -130,11 +130,6 @@ GIT
     email_reply_parser (0.6)
 
 PATH
-  remote: vendor/gems/discourse_emoji
-  specs:
-    discourse_emoji (0.0.1)
-
-PATH
   remote: vendor/gems/discourse_plugin
   specs:
     discourse_plugin (0.0.1)
@@ -151,7 +146,7 @@ PATH
       rails (> 3.1)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionpack-action_caching (1.0.0)
       actionpack (>= 4.0.0.beta, < 5.0)
@@ -471,7 +466,6 @@ DEPENDENCIES
   binding_of_caller
   certified
   diffy (>= 3.0)
-  discourse_emoji!
   discourse_plugin!
   email_reply_parser!
   ember-rails
