@@ -378,8 +378,7 @@ fr:
     unmute: Activer
     last_post: Dernier message
 
-    best_of:
-      title: "les meilleurs"
+    summary:
       enabled_description: "Vous êtes actuellement en train de consulter seulement les messages les plus populaires de cette discussion. Pour voir tous les messages, cliquez ci-dessous."
       description: "Il y a <b>{{count}}</b> messages dans cette discussion. C'est beaucoup ! Voulez-vous gagner du temps en n'affichant que les meilleurs messages ?"
       enable: 'Basculer dans la vue  : "les meilleurs"'
@@ -730,8 +729,8 @@ fr:
         by_n_users:
           one: "de l'utilisateur"
           other: "rédigés par {{count}} utilisateurs"
-        best_of: "Vous voyez seulement {{n_best_posts}} {{of_n_posts}} de cette discussion."
-        n_best_posts:
+        summary: "Vous voyez seulement {{n_summarized_posts}} {{of_n_posts}} de cette discussion."
+        n_summarized_posts:
           one: "le message"
           other: "les {{count}} messages"
         of_n_posts:
@@ -960,7 +959,7 @@ fr:
         at_least: "saisissez au moins {{n}} caractères"
         more: "{{n}} restants..."
         left: "{{n}} restants"
-    topic_summary:
+    topic_map:
       title: "Résumé de la discussion"
       links_shown: "montrer les {{totalLinks}} liens..."
       clicks: "clics"
@@ -983,7 +982,7 @@ fr:
     activity: "Activité"
     likes: "J'aime"
     likes_long: "il y a {{number}} j'aime dans cette discussion"
-    top_contributors: "Participants"
+    participants: "Participants"
     category_title: "Catégorie"
     history: "Historique"
     changed_by: "par {{author}}"
@@ -1032,6 +1031,7 @@ fr:
       create_post: "Répondre / Voir"
       readonly: "Voir"
   admin_js:
+    type_to_filter: "Commencez à taper pour filtrer..."
     admin:
       title: 'Administation Discourse'
       moderator: 'Modérateur'
@@ -1054,7 +1054,7 @@ fr:
         moderators: 'Modérateurs :'
         admins: 'Administateurs :'
         blocked: 'Bloqués :'
-        banned: 'Banni :'
+        suspended: 'Banni :'
         private_messages_short: "MPs"
         private_messages_title: "Messages Privés"
         reports:
@@ -1245,7 +1245,7 @@ fr:
           pending: "En attente"
           admins: 'Administrateurs'
           moderators: 'Modérateurs'
-          banned: 'Banni'
+          suspended: 'Banni'
           blocked: 'Bloqué'
         approved: "Approuvé ?"
         approved_selected:
@@ -1266,7 +1266,7 @@ fr:
           admins: 'Administrateurs'
           moderators: 'Modérateurs'
           blocked: 'Utilisateurs bloqués'
-          banned: 'Utilisateurs bannis'
+          suspended: 'Utilisateurs bannis'
         reject_successful:
           one: "Utilisateur rejeté avec succès."
           other: "%{count} utilisateurs rejetés avec succès."
@@ -1274,14 +1274,14 @@ fr:
           one: "Utilisateur dont le rejet a échoué."
           other: "%{count} utilisateurs dont le rejet a échoué."
       user:
-        ban_failed: "Il y a eu un problème pendant le bannissement de cet utilisateur {{error}}"
-        unban_failed: "Il y a eu un problème pendant le débannissement de cet utilisateur {{error}}"
-        ban_duration: "Pour combien de temps voulez-vous bannir cet utilisateur ? (jours)"
+        suspend_failed: "Il y a eu un problème pendant le bannissement de cet utilisateur {{error}}"
+        unsuspend_failed: "Il y a eu un problème pendant le débannissement de cet utilisateur {{error}}"
+        suspend_duration: "Pour combien de temps voulez-vous bannir cet utilisateur ? (jours)"
         delete_all_posts: "Supprimer tous les messages"
         delete_all_posts_confirm: "Vous allez supprimer supprimer %{posts} messages et %{topics} discussions. Êtes-vous sûr ?"
-        ban: "Bannir"
-        unban: "Débannir"
-        banned: "Banni ?"
+        suspend: "Bannir"
+        unsuspend: "Débannir"
+        suspended: "Banni ?"
         moderator: "Modérateur ?"
         admin: "Admin ?"
         blocked: "Bloqué ?"

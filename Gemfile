@@ -12,7 +12,7 @@ end
 
 module ::Kernel
   def rails4?
-    !!ENV["RAILS4"]
+    !ENV["RAILS3"]
   end
 end
 
@@ -35,7 +35,7 @@ end
 gem 'seed-fu' , github: 'SamSaffron/seed-fu'
 
 if rails4?
-  gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '4-0-stable'
+  gem 'rails'
   gem 'redis-rails', :git => 'git://github.com/SamSaffron/redis-store.git'
   gem 'rails-observers'
   gem 'actionpack-action_caching'
@@ -77,7 +77,7 @@ gem 'eventmachine'
 gem 'fast_xs'
 gem 'fast_xor', git: 'https://github.com/CodeMonkeySteve/fast_xor.git'
 gem 'fastimage'
-gem 'fog', require: false
+gem 'fog', '1.18.0', require: false
 
 gem 'email_reply_parser', git: 'https://github.com/lawrencepit/email_reply_parser.git'
 
@@ -108,7 +108,7 @@ gem 'rest-client'
 gem 'rinku'
 gem 'sanitize'
 gem 'sass'
-gem 'sidekiq'
+gem 'sidekiq', '2.15.1'
 gem 'sidekiq-failures'
 gem 'sinatra', require: nil
 gem 'slim'  # required for sidekiq-web
@@ -132,7 +132,6 @@ gem 'discourse_plugin', path: 'vendor/gems/discourse_plugin'
 # in production environments by default.
 # allow everywhere for now cause we are allowing asset debugging in prd
 group :assets do
-  gem 'sass'
   gem 'sass-rails'
   # Sam: disabling for now, having issues with our jenkins build
   # gem 'turbo-sprockets-rails3'

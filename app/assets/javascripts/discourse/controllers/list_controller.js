@@ -13,12 +13,11 @@ Discourse.ListController = Discourse.Controller.extend({
   needs: ["composer", "modal", "listTopics"],
 
   availableNavItems: function() {
-    var loggedOn = !!Discourse.User.current();
     var category = this.get("category");
 
     return Discourse.SiteSettings.top_menu.split("|").map(function(i) {
       return Discourse.NavItem.fromText(i, {
-        loggedOn: loggedOn,
+        loggedOn: !!Discourse.User.current(),
         category: category
       });
     }).filter(function(i) {
@@ -47,14 +46,14 @@ Discourse.ListController = Discourse.Controller.extend({
     @returns {Ember.Deferred} the promise that will resolve to the list of items.
   **/
   load: function(filterMode) {
-    var listController = this;
+    var self = this;
     this.set('loading', true);
 
     var trackingState = Discourse.TopicTrackingState.current();
 
     if (filterMode === 'categories') {
       return Discourse.CategoryList.list(filterMode).then(function(items) {
-        listController.setProperties({
+        self.setProperties({
           loading: false,
           filterMode: filterMode,
           categoryMode: true,
@@ -76,7 +75,7 @@ Discourse.ListController = Discourse.Controller.extend({
     }
 
     return Discourse.TopicList.list(current).then(function(items) {
-      listController.setProperties({
+      self.setProperties({
         loading: false,
         filterMode: filterMode,
         draft: items.draft,

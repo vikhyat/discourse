@@ -1,3 +1,5 @@
+{{view Discourse.HtmlView key="top"}}
+
 <div class='list-controls'>
   <div class="container">
 
@@ -27,23 +29,11 @@
     <div class="full-width">
       <div id='list-area'>
         {{view Discourse.TopicListAdsenseView}}
-
-        {{#if loading}}
-          <div class='contents loading'>
-            <table id='topic-list'>
-              <tr>
-                <td colspan='8'>
-                  <div class='spinner'>{{i18n loading}}</div>
-                </td>
-              </tr>
-            </table>
-          </div>
-        {{/if}}
-
+        {{discourse-topic-list-loading loading=loading}}
         {{outlet listView}}
       </div>
     </div>
   </div>
 </div>
 
-
+{{view Discourse.HtmlView key="bottom"}}

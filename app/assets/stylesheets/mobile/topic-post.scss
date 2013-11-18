@@ -126,11 +126,7 @@ a.star {
 	text-shadow: none !important;
 }
 
-.profiler-results {
-  display: none;
-}
-
-.topic-summary {
+.topic-map {
 
   .btn {
     border-radius: 0 4px 0 4px;
@@ -190,7 +186,7 @@ a.star {
     margin-right: 4px;
   }
 
-  .summary {
+  .map {
     &.collapsed {
     }
     li {
