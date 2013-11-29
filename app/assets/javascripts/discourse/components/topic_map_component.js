@@ -1,7 +1,7 @@
 /**
   The topic map underneath the first post of a topic.
 
-  @class DiscourseTopicMapComponent
+  @class TopicMapComponent
   @extends Ember.Component
   @namespace Discourse
   @module Discourse
@@ -9,9 +9,9 @@
 
 var LINKS_SHOWN = 5;
 
-Discourse.DiscourseTopicMapComponent = Ember.Component.extend({
+Discourse.TopicMapComponent = Ember.Component.extend({
   mapCollapsed: true,
-  templateName: 'components/discourse-topic-map',
+  templateName: 'components/topic-map',
   details: Em.computed.alias('topic.details'),
   allLinksShown: false,
 
@@ -19,7 +19,7 @@ Discourse.DiscourseTopicMapComponent = Ember.Component.extend({
     this._super();
 
     // If the topic has a summary, expand the map by default
-    this.set('mapCollapsed', !this.get('topic.has_summary'));
+    this.set('mapCollapsed', Discourse.Mobile.mobileView || (!this.get('topic.has_summary')));
   },
 
   toggleMapClass: function() {
@@ -33,11 +33,12 @@ Discourse.DiscourseTopicMapComponent = Ember.Component.extend({
   }.property('allLinksShown', 'topic.details.links'),
 
   infoLinks: function() {
-    if (Em.isNone('details.links')) return [];
-
     var allLinks = this.get('details.links');
+    if (Em.isNone(allLinks)) return [];
+
     if (this.get('allLinksShown')) return allLinks;
     return allLinks.slice(0, LINKS_SHOWN);
+
   }.property('details.links', 'allLinksShown'),
 
   actions: {
