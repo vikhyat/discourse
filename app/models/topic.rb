@@ -605,7 +605,7 @@ class Topic < ActiveRecord::Base
   # TODO: change this method, along with category's auto_close_days. Use hours.
   def auto_close_days=(num_days)
     @ignore_category_auto_close = true
-    set_auto_close(num_days * 24)
+    set_auto_close( num_days ? num_days * 24 : nil)
   end
 
   def self.auto_close
@@ -729,6 +729,7 @@ end
 #  auto_close_user_id      :integer
 #  auto_close_started_at   :datetime
 #  deleted_by_id           :integer
+#  participant_count       :integer          default(1)
 #
 # Indexes
 #
@@ -737,4 +738,3 @@ end
 #  index_topics_on_deleted_at_and_visible_and_archetype_and_id  (deleted_at,visible,archetype,id)
 #  index_topics_on_id_and_deleted_at                            (id,deleted_at)
 #
-
