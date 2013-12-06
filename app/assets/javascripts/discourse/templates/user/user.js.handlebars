@@ -129,7 +129,9 @@
           <div class='primary'>
           {{boundAvatar model imageSize="huge"}}
           <h1>{{username}} {{{statusIcon}}}</h1>
-          <h2>{{name}}</h2>
+          {{#if showName}}
+            <h2>{{name}}</h2>
+          {{/if}}
 
           <div class='bio'>{{{bio_excerpt}}}</div>
 

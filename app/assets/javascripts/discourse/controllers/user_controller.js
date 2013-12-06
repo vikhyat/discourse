@@ -12,6 +12,10 @@ Discourse.UserController = Discourse.ObjectController.extend({
     return this.get('content.username') === Discourse.User.currentProp('username');
   }.property('content.username'),
 
+  showName: function() {
+    return Discourse.SiteSettings.names_enabled;
+  }.property(),
+
   collapsedInfo: Em.computed.not('indexStream'),
 
   canSeePrivateMessages: function() {

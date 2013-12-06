@@ -8,6 +8,13 @@
 **/
 Discourse.User = Discourse.Model.extend({
 
+  init: function() {
+    if (!Discourse.SiteSettings.enable_names) {
+      this.set('name', this.get('username'));
+    }
+    return this._super();
+  },
+
   /**
     The user's stream
 
