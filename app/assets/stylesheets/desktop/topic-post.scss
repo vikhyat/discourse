@@ -1,6 +1,23 @@
 @import "common/foundation/variables";
 @import "common/foundation/mixins";
 
+.gap {
+  background-color: #f9f9f9;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  color: #999;
+  cursor: pointer;
+  text-align: center;
+  width: 820px;
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  @include medium-width {
+    width: 800px;
+  }
+}
 
 .container {
   @extend .clearfix;
