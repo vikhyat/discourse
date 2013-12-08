@@ -8,13 +8,6 @@
 **/
 Discourse.User = Discourse.Model.extend({
 
-  init: function() {
-    if (!Discourse.SiteSettings.enable_names) {
-      this.set('name', this.get('username'));
-    }
-    return this._super();
-  },
-
   /**
     The user's stream
 
@@ -41,6 +34,20 @@ Discourse.User = Discourse.Model.extend({
       user: this
     };
   }.property('username_lower'),
+
+  /**
+    This user's display name. Returns the name if possible, otherwise returns the
+    username.
+
+    @property displayName
+    @type {String}
+  **/
+  displayName: function() {
+    if (Discourse.SiteSettings.enable_names && !this.blank('name')) {
+      return this.get('name');
+    }
+    return this.get('username');
+  }.property('username', 'name'),
 
   /**
     This user's website.
