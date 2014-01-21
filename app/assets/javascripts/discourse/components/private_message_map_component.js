@@ -15,6 +15,7 @@ Discourse.PrivateMessageMapComponent = Ember.View.extend({
   init: function() {
     this._super();
     this.set('context', this);
+    this.set('controller', this);
   },
 
   actions: {
@@ -33,7 +34,7 @@ Discourse.PrivateMessageMapComponent = Ember.View.extend({
     },
 
     showPrivateInvite: function() {
-      this.get('controller').send('showPrivateInviteAction');
+      this.sendAction('showPrivateInviteAction');
     }
   }
 
