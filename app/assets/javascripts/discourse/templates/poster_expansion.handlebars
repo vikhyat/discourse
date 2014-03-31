@@ -19,7 +19,7 @@
       <div class="badge-section">
         <h3>{{i18n badges.badge_count count=user.badge_count}}</h3>
         {{#each user.featured_user_badges}}
-          <span class="badge">{{badge.name}}</span>
+          {{show-badge badge=badge}}
         {{/each}}
         {{#if showMoreBadges}}
           <span class="btn more-badges">{{i18n badges.more_badges count=moreBadgesCount}}</span>

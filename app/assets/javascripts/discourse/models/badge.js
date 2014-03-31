@@ -54,6 +54,10 @@ Discourse.Badge = Discourse.Model.extend({
     return translation;
   }.property('i18nNameKey'),
 
+  typeClass: function() {
+    return Discourse.Badge.classNames[this.get('badge_type_id')];
+  }.property('badge_type_id'),
+
   /**
     Update this badge with the response returned by the server on save.
 
@@ -122,6 +126,9 @@ Discourse.Badge = Discourse.Model.extend({
 });
 
 Discourse.Badge.reopenClass({
+
+  classNames: {3: 'badge-bronze', 2: 'badge-silver', 1: 'badge-gold'},
+
   /**
     Create `Discourse.Badge` instances from the server JSON response.
 
